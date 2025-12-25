@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siya ji ke liye task num 4</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;800&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: #050505;
+            color: #fff;
+            font-family: 'Montserrat', sans-serif;
+            height: 100vh;
+        }
+
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        #ui-layer {
+            position: relative;
+            z-index: 10;
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .glass-card {
+            background: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 40px;
+            padding: 2.5rem;
+            width: 90%;
+            max-width: 480px;
+            text-align: center;
+            display: none;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.9);
+        }
+
+        .active { display: block; }
+
+        .btn-action {
+            background: linear-gradient(135deg, #ff0080 0%, #7928ca 100%);
+            padding: 15px 40px;
+            border-radius: 100px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin-top: 2rem;
+            cursor: pointer;
+            border: none;
+            color: white;
+            box-shadow: 0 10px 30px rgba(255, 0, 128, 0.4);
+            text-transform: uppercase;
+        }
+
+        .btn-gift {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            padding: 12px 30px;
+            border-radius: 100px;
+            font-weight: 700;
+            margin-top: 1.5rem;
+            display: inline-block;
+            cursor: pointer;
+            text-decoration: none;
+            color: white;
+            box-shadow: 0 8px 20px rgba(245, 158, 11, 0.3);
+            transition: 0.3s;
+        }
+
+        .btn-gift:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 25px rgba(245, 158, 11, 0.5);
+        }
+
+        .btn-action:hover {
+            transform: scale(1.1) translateY(-5px);
+            box-shadow: 0 20px 40px rgba(255, 0, 128, 0.6);
+        }
+
+        .romantic-title {
+            font-family: 'Dancing Script', cursive;
+            background: linear-gradient(to right, #ffafbd, #ffc3a0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 2.5rem;
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .bento-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .photo-frame {
+            background: white;
+            padding: 8px 8px 30px 8px;
+            transform: rotate(-3deg);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+            margin: 15px auto;
+            width: 180px;
+        }
+
+        .photo-frame img { width: 100%; height: 160px; object-fit: cover; }
+    </style>
+</head>
+<body>
+
+    <div id="canvas-container"></div>
+
+    <div id="ui-layer">
+        <div id="s1" class="glass-card active">
+            <h1 class="text-3xl font-extrabold mb-4">YOIII !!! MAALKIN BAII !! </h1>
+            <p class="text-gray-400">AAJ HE 29th NOV , raatke 3:12 horhe he , aankhe poori LAALAMLAAL</p>
+            <button onclick="navigate(2)" class="btn-action">STILL MY LOVE IS ETERNAL FOR YOU !</button>
+        </div>
+
+        <div id="s2" class="glass-card">
+            <h1 class="romantic-title mb-4">PICHLI WEB THODI COMPLECATED THI AND YEH USS SE BHI JYADA </h1>
+            <p class="text-gray-300">Maazi kuchupuchu SAATHI ME KAHI PAN KAREL !!! 😋</p>
+            <button onclick="navigate(3)" class="btn-action"> SO SEE THE THIRD TASK NOW !! 😈</button>
+        </div>
+
+        <div id="s3" class="glass-card">
+            <h2 class="text-xl font-bold mb-2 text-pink-400 italic">"THIRD TASK BOHT SIMPLE HE BOHT !! 🌚"</h2>
+            <div class="bento-grid">
+                <div class="bento-item col-span-2 text-xs opacity-80">ARAA SACHME WIFEY 🥱</div>
+                <div class="bento-item">
+                    <b class="text-pink-300">Kindness ✨</b><br><span class="text-[10px]">🌚 CHALIYE CHALIYE ! WOH DIRECT AKHRI PAGE PAR LIKHA HE </span>
+                </div>
+                <div class="bento-item">
+                    <b class="text-blue-300">Perfect 😊</b><br><span class="text-[10px]"> HAAN CHALIYE AAGE !!! 😈</span>
+                </div>
+            </div>
+            <button onclick="navigate(4)" class="btn-action">AAGE !!!</button>
+        </div>
+
+        <div id="s4" class="glass-card">
+            <h2 class="text-xl font-bold">AAGE MERI BAYKO 🌚</h2>
+            <div class="photo-frame">
+                <img src="https://i.pinimg.com/474x/64/8a/db/648adbba09061024ec4653a2beaddae2.jpg" alt="Memory">
+                <p class="text-black font-bold mt-2 text-[10px]">👉👈👉👈</p>
+            </div>
+            <p class="text-gray-400 text-[11px] mt-2">Taliye Taliye !!! 😋</p>
+            <button onclick="navigate(5)" class="btn-action">YAYYY TALIYE !!😁</button>
+        </div>
+
+        <div id="s5" class="glass-card">
+            <h1 class="text-3xl font-bold mb-4">toh aapka YEH TASK HOGA 🌚</h1>
+            <p class="text-gray-300">UKHAANA GHYAAA !!!! 😈</p>
+            <div id="final-wish" class="hidden text-xl font-bold text-pink-500 mt-6 animate-pulse">
+                CHALAA UKHAANA GHYAA !!! 😈
+            </div>
+            <button id="celebrate-btn" onclick="fireworks()" class="btn-action">RAG4NU KO UKHAANA LEKE VOICE MSG SEND KARNA HE !!! 😈</button>
+            
+            <div id="gift-section" class="hidden">
+                <a href="https://www.instagram.com/anusiyaforever/?utm_source=ig_web_button_share_sheet" target="_blank" class="btn-gift">
+                    AUR ISKE BAAD 😋🎁
+                </a>
+                <p class="text-[10px] text-gray-500 mt-2">Ek aur surprise wait kar raha hai!</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- THREE.JS 3D BACKGROUND WITH TEXT ---
+        let scene, camera, renderer, textMeshes = [];
+        const nicknames = ["SIYA", "MAALKIN", "Siya Narute", "BAYKO", "❤️"];
+
+        function init3D() {
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+            nicknames.forEach((name, index) => {
+                for(let i=0; i<6; i++) {
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+                    canvas.width = 512;
+                    canvas.height = 256;
+                    
+                    ctx.font = 'Bold 80px Dancing Script, cursive';
+                    ctx.fillStyle = index === 4 ? '#ff0000' : '#ff0080';
+                    ctx.textAlign = 'center';
+                    ctx.shadowBlur = 20;
+                    ctx.shadowColor = "rgba(255, 0, 128, 0.8)";
+                    ctx.fillText(name, 256, 128);
+
+                    const texture = new THREE.CanvasTexture(canvas);
+                    const material = new THREE.SpriteMaterial({ map: texture, transparent: true });
+                    const sprite = new THREE.Sprite(material);
+                    
+                    sprite.position.set((Math.random()-0.5)*120, (Math.random()-0.5)*120, (Math.random()-0.5)*60);
+                    const scale = name === "❤️" ? 10 : 20;
+                    sprite.scale.set(scale, scale / 2, 1);
+                    sprite.userData = { speedX: (Math.random()-0.5)*0.08, speedY: (Math.random()-0.5)*0.08, phase: Math.random()*Math.PI*2 };
+
+                    scene.add(sprite);
+                    textMeshes.push(sprite);
+                }
+            });
+
+            const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+            scene.add(ambientLight);
+            camera.position.z = 60;
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            textMeshes.forEach(mesh => {
+                mesh.position.x += mesh.userData.speedX;
+                mesh.position.y += Math.sin(Date.now() * 0.001 + mesh.userData.phase) * 0.03;
+                if(mesh.position.x > 70) mesh.position.x = -70;
+                if(mesh.position.x < -70) mesh.position.x = 70;
+                if(mesh.position.y > 70) mesh.position.y = -70;
+                if(mesh.position.y < -70) mesh.position.y = 70;
+            });
+            renderer.render(scene, camera);
+        }
+
+        function navigate(step) {
+            const current = document.querySelector('.glass-card.active');
+            const next = document.getElementById('s' + step);
+            gsap.to(current, { opacity: 0, y: -50, scale: 0.8, duration: 0.5, onComplete: () => {
+                current.classList.remove('active');
+                next.classList.add('active');
+                gsap.fromTo(next, { opacity: 0, y: 50, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.6, ease: "back.out(1.7)" });
+            }});
+        }
+
+        function fireworks() {
+            document.getElementById('celebrate-btn').style.display = 'none';
+            document.getElementById('final-wish').classList.remove('hidden');
+            document.getElementById('gift-section').classList.remove('hidden'); // SHOW GIFT BUTTON
+            
+            var end = Date.now() + (5 * 1000);
+            var colors = ['#ff0080', '#ffffff', '#7928ca'];
+
+            (function frame() {
+              confetti({ particleCount: 3, angle: 60, spread: 55, origin: { x: 0 }, colors: colors });
+              confetti({ particleCount: 3, angle: 120, spread: 55, origin: { x: 1 }, colors: colors });
+              if (Date.now() < end) requestAnimationFrame(frame);
+            }());
+        }
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        init3D();
+        animate();
+    </script>
+</body>
+</html>
